@@ -27,8 +27,7 @@ A API expõe endpoints RESTful usando **ASP.NET Core**. Cada endpoint é respons
 
 ### Arquitetura da API
 
-- Abordagem Monolítica
-O projeto está implementado como uma aplicação monolítica. Toda a lógica da aplicação é implementada em um único projeto, e todas as funcionalidades estão agrupadas dentro de uma única base de código.
+Abordagem Monolítica: O projeto está implementado como uma aplicação monolítica. Toda a lógica da aplicação é implementada em um único projeto, e todas as funcionalidades estão agrupadas dentro de uma única base de código.
 
 - Justificativas para a Abordagem Monolítica
 
