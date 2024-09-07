@@ -55,7 +55,7 @@ Abordagem Monolítica: O projeto está implementado como uma aplicação monolí
 
 ### Instruções para Rodar a API
 
-- Pré-requisitos
+Pré-requisitos:
 - **.NET Core SDK**: Certifique-se de ter o .NET Core SDK instalado. Baixe e instale o [.NET SDK](https://dotnet.microsoft.com/download).
 - **Banco de Dados**: A API usa um banco de dados configurado no contexto `DataContext`. Certifique-se de que o banco de dados está acessível.
 
