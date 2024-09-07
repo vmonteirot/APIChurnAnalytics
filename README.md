@@ -41,7 +41,6 @@ Abordagem Monolítica: O projeto está implementado como uma aplicação monolí
 
 3. **Coerência e Coesão**
    - **Integração e Consistência**: A lógica e os dados estão encapsulados em uma única aplicação, o que pode garantir a consistência dos dados e a integridade das operações.
-   - **Facilidade de Coordenação de Equipe**: Equipes menores podem colaborar mais eficientemente em uma única base de código.
 
 4. **Escalabilidade Inicial**
    - **Escalabilidade Vertical**: A aplicação pode escalar verticalmente no estágio inicial, o que pode ser suficiente para lidar com a carga esperada.
@@ -49,9 +48,6 @@ Abordagem Monolítica: O projeto está implementado como uma aplicação monolí
 5. **Facilidade de Manutenção**
    - **Menos Dependências Externas**: Menos dependências entre serviços simplificam a manutenção e a solução de problemas.
    - **Desenvolvimento e Atualizações**: Atualizações e novos recursos podem ser implementados em um único projeto.
-
-6. **Adaptação a Requisitos**
-   - **Adequação ao Escopo Atual**: Para um projeto com um escopo bem definido e sem alta complexidade de serviços interdependentes, uma abordagem monolítica é adequada.
 
 ### Instruções para Rodar a API
 
