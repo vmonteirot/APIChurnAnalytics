@@ -20,7 +20,7 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Restore dependencies
-        run: dotnet restore './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
+        run: dotnet restore './ChallengeChurnAnalytics/ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
 
       - name: Build the project
         run: dotnet build './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' --configuration Release
