@@ -19,13 +19,6 @@ jobs:
         with:
           dotnet-version: '8.x'
 
-      - name: Display directory structure (debugging step)
-        run: |
-          Write-Host "Listing directory structure..."
-          Get-ChildItem -Recurse
-          Write-Host "Listing contents of ChallengeChurnAnalytics folder..."
-          Get-ChildItem ChallengeChurnAnalytics
-
       - name: Restore dependencies
         run: dotnet restore './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
 
@@ -46,7 +39,7 @@ jobs:
     needs: build
     environment:
       name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+      url: 'https://churnanalyticsapi.azurewebsites.net'
     permissions:
       id-token: write
 
