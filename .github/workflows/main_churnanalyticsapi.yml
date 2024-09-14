@@ -21,10 +21,10 @@ jobs:
 
       - name: Display directory structure (debugging step)
         run: |
-          echo "Listing directory structure..."
-          ls -R
-          echo "Listing contents of ChallengeChurnAnalytics folder..."
-          ls -la ChallengeChurnAnalytics
+          Write-Host "Listing directory structure..."
+          Get-ChildItem -Recurse
+          Write-Host "Listing contents of ChallengeChurnAnalytics folder..."
+          Get-ChildItem ChallengeChurnAnalytics
 
       - name: Restore dependencies
         run: dotnet restore 'ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
