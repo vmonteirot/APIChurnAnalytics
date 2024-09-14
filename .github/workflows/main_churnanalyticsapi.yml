@@ -20,16 +20,20 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Display directory structure (debugging step)
-        run: ls -R
+        run: |
+          echo "Listing directory structure..."
+          ls -R
+          echo "Listing contents of ChallengeChurnAnalytics folder..."
+          ls -la ChallengeChurnAnalytics
 
       - name: Restore dependencies
-        run: dotnet restore './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
+        run: dotnet restore 'ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
 
       - name: Build the project
-        run: dotnet build './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' --configuration Release
+        run: dotnet build 'ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' --configuration Release
 
       - name: Publish the project
-        run: dotnet publish './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' -c Release -o ${{ github.workspace }}/myapp
+        run: dotnet publish 'ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' -c Release -o ${{ github.workspace }}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -61,6 +65,6 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'churnanalyticsapi' # Substitua pelo nome do seu Serviço de Aplicativo
+          app-name: 'churnanalyticsapi'
           slot-name: 'production'
           package: ${{ github.workspace }}/myapp
