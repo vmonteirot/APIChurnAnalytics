@@ -19,6 +19,9 @@ jobs:
         with:
           dotnet-version: '8.x'
 
+      - name: List files in directory
+        run: ls -R
+
       - name: Restore dependencies
         run: dotnet restore './ChallengeChurnAnalytics/ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
 
