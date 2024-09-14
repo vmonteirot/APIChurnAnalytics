@@ -11,38 +11,37 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - name: List files in the directory
+        run: ls -R
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
-      - name: List files in directory
-        run: ls -R
-
       - name: Restore dependencies
-        run: dotnet restore './ChallengeChurnAnalytics/ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
+        run: dotnet restore './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
 
-      - name: Build the project
+      - name: Build with dotnet
         run: dotnet build './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' --configuration Release
 
-      - name: Publish the project
-        run: dotnet publish './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' -c Release -o ${{ github.workspace }}/myapp
+      - name: Publish app
+        run: dotnet publish './ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
-          path: ${{ github.workspace }}/myapp
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: windows-latest
     needs: build
     environment:
       name: 'production'
-      url: 'https://churnanalyticsapi.azurewebsites.net'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
       id-token: write
 
@@ -51,11 +50,13 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -63,4 +64,4 @@ jobs:
         with:
           app-name: 'churnanalyticsapi'
           slot-name: 'production'
-          package: ${{ github.workspace }}/myapp
+          package: .
