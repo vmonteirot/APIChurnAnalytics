@@ -13,9 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # List files to check the structure of the project
-      - name: List files in the repository
-        run: dir /s
+      - name: Exibir diretório atual
+        run: pwd
+      
+      - name: Listar arquivos no diretório
+        run: Get-ChildItem -Recurse
 
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
