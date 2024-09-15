@@ -13,25 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Exibir diretório atual
-        run: pwd
-      
-      - name: Listar arquivos no diretório
-        run: Get-ChildItem -Recurse
-
       - name: Set up .NET Core
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
 
-      - name: Restore dependencies
-        run: dotnet restore 'ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj'
+      - name: Set working directory
+        run: cd ChallengeChurnAnalytics
 
       - name: Build with dotnet
-        run: dotnet build 'ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' --configuration Release
+        run: dotnet build './ChallengeChurnAnalytics.csproj' --configuration Release
 
-      - name: Publish app
-        run: dotnet publish 'ChallengeChurnAnalytics/ChallengeChurnAnalytics.csproj' -c Release -o ${{env.DOTNET_ROOT}}/myapp
+      - name: dotnet publish
+        run: dotnet publish './ChallengeChurnAnalytics.csproj' -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -46,14 +40,14 @@ jobs:
       name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write
+      id-token: write #This is required for requesting the JWT
 
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
